@@ -205,4 +205,16 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+    //to know who hit maximum hundreds and had best avgs
+    public String getMaximumHundredWithAvgSorted() throws CricketLeagueAnalyserException{
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> hundredComparator = Comparator.comparing(cricket -> cricket.hundred);
+        Comparator<CricketersDataDAO> avgComparator = Comparator.comparing(cricket -> cricket.avg);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = descendingSort(avgComparator.thenComparing(hundredComparator),cricketersDataDAOList);
+        String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
+        return sortedFactSheetJson;
+    }
 }
