@@ -62,21 +62,11 @@ public class CricketLeagueAnalyzerTest {
     }
 
     @Test
-    public void givenMostWktsCSVFileReturnsCorrectRecords() throws CricketLeagueAnalyserException{
-        try {
-            CricketLeagueAnalyzer cricketLeagueAnalyser = new CricketLeagueAnalyzer();
-            int numberOfRecords = cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BOWLER, IPL_MOST_WKTS_CSV_FILE_PATH);
-            Assert.assertEquals(99, numberOfRecords);
-            System.out.println("Inside try block");
-        } catch ( CricketLeagueAnalyserException e) {
-        }
-    }
-    @Test
     public void givenMostRunFactSheet_WhenShortedOnBestBowlingAverage_ShouldReturnSortedResult() throws CricketLeagueAnalyserException {
         CricketLeagueAnalyzer cricketLeagueAnalyser = new CricketLeagueAnalyzer();
         cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BOWLER, IPL_MOST_WKTS_CSV_FILE_PATH);
         String sortedFactSheetData = cricketLeagueAnalyser.getBestRunsWithBattingAverageSortedFactSheet();
         IPL2019FactsheetMostWktsCSV[] iplMostWktsCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostWktsCSV[].class);
-        Assert.assertEquals("Krishnappa Gowtham", iplMostWktsCSV[0].player);
+        Assert.assertEquals("Umesh Yadav", iplMostWktsCSV[0].player);
     }
 }

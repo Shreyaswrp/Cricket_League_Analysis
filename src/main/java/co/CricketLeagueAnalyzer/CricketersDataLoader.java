@@ -3,7 +3,6 @@ package co.CricketLeagueAnalyzer;
 import CensusAnalyserJarDemo.CSVBuilderException;
 import CensusAnalyserJarDemo.CSVBuilderFactory;
 import CensusAnalyserJarDemo.ICSVBuilder;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -15,6 +14,15 @@ import java.util.stream.StreamSupport;
 
 public class CricketersDataLoader {
 
+    public Map<String, CricketersDataDAO> loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType playerType, String csvFilePath) throws CricketLeagueAnalyserException {
+        if (playerType.equals(CricketLeagueAnalyzer.PlayerType.BATSMEN)) {
+            return this.loadFactSheetData(IPL2019FactsheetMostRunsCSV.class, csvFilePath);
+        } else if (playerType.equals(CricketLeagueAnalyzer.PlayerType.BOWLER)) {
+            return this.loadFactSheetData(IPL2019FactsheetMostWktsCSV.class, csvFilePath);
+        } else throw new CricketLeagueAnalyserException("Incorrect Player Type",
+                CricketLeagueAnalyserException.ExceptionType.INVALID_PLAYER_TYPE);
+
+    }
 
     private <E> Map<String, CricketersDataDAO> loadFactSheetData(Class<E> factSheetCSVClass, String csvFilePath) throws CricketLeagueAnalyserException {
         Map<String, CricketersDataDAO> map = new HashMap<>();
@@ -40,14 +48,4 @@ public class CricketersDataLoader {
         }
     }
 
-
-    public Map<String, CricketersDataDAO> loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType playerType, String csvFilePath) throws CricketLeagueAnalyserException {
-        if (playerType.equals(CricketLeagueAnalyzer.PlayerType.BATSMEN)) {
-            return this.loadFactSheetData(IPL2019FactsheetMostRunsCSV.class, csvFilePath);
-        } else if (playerType.equals(CricketLeagueAnalyzer.PlayerType.BOWLER)) {
-            return this.loadFactSheetData(IPL2019FactsheetMostWktsCSV.class, csvFilePath);
-        } else throw new CricketLeagueAnalyserException("Incorrect Player Type",
-                CricketLeagueAnalyserException.ExceptionType.INVALID_PLAYER_TYPE);
-
-    }
 }

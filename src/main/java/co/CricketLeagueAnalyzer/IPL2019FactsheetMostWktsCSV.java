@@ -10,7 +10,7 @@ public class IPL2019FactsheetMostWktsCSV {
     public int matches;
 
     @CsvBindByName(column = "Avg", required = true)
-    public double avg;
+    public double bowlingAvg;
 
     @CsvBindByName(column = "Wkts", required = true)
     public int wkts;

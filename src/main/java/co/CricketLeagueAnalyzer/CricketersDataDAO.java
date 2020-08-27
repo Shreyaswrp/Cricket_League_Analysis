@@ -13,7 +13,7 @@ public class CricketersDataDAO {
     public int sixes;
     public int fiveWkts;
     public int fourWkts;
-
+    public double bowlingAvg;
 
     public CricketersDataDAO(IPL2019FactsheetMostRunsCSV mostRunsCSV) {
         player = mostRunsCSV.player;
@@ -30,7 +30,7 @@ public class CricketersDataDAO {
         player = mostWktsCSV.player;
         matches = mostWktsCSV.matches;
         wkts = mostWktsCSV.wkts;
-        avg = mostWktsCSV.avg;
+        bowlingAvg = mostWktsCSV.bowlingAvg;
         inns = mostWktsCSV.inns;
         sr = mostWktsCSV.sr;
         fourWkts = mostWktsCSV.fourWkts;

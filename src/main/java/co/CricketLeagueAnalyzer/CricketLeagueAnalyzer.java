@@ -106,10 +106,13 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+    //to know bowling avg of the cricketers
     public String getBestBowlingAverageSortedFactSheet() throws CricketLeagueAnalyserException{
-        Comparator<CricketersDataDAO> bowlingAvgComparator = Comparator.comparing(leagueFact -> leagueFact.avg);
-        List<CricketersDataDAO> factSheetDAO = map.values().stream()
-                .collect(Collectors.toList());
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> bowlingAvgComparator = Comparator.comparing(leagueFact -> leagueFact.bowlingAvg);
+        List<CricketersDataDAO> factSheetDAO = map.values().stream().collect(Collectors.toList());
         factSheetDAO = descendingSort( bowlingAvgComparator,factSheetDAO);
         String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
         return sortedFactSheetJson;
