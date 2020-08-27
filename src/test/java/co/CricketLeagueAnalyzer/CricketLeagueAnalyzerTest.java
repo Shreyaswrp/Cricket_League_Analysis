@@ -18,6 +18,16 @@ public class CricketLeagueAnalyzerTest {
     }
 
 
+    @Test
+    public void givenMostRunFactSheet_WhenShortedOnStrikingRates_ShouldReturnSortedResult() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyzer cricketLeagueAnalyser = new CricketLeagueAnalyzer();
+        cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BATSMEN, IPL_MOST_RUNS_CSV_FILE_PATH);
+        String sortedFactSheetData = cricketLeagueAnalyser.getStrikingRatesSortedFactSheet();
+        IPL2019FactsheetMostRunsCSV[] iplMostRunCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostRunsCSV[].class);
+        Assert.assertEquals("Ishant Sharma", iplMostRunCSV[0].player);
+    }
+
+
 
 
 }

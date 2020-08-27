@@ -47,4 +47,15 @@ public class CricketLeagueAnalyzer {
         return new Gson().toJson(cricketersDataDAOList);
     }
 
+    //to know the top striking rates of the batsman
+    public String getStrikingRatesSortedFactSheet() throws CricketLeagueAnalyserException {
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> censusComparator = Comparator.comparing(cricket -> cricket.sr);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = descendingSort(censusComparator, cricketersDataDAOList);
+        return new Gson().toJson(cricketersDataDAOList);
+    }
+
 }

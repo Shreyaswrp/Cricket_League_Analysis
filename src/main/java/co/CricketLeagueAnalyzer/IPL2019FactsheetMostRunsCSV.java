@@ -18,4 +18,7 @@ public class IPL2019FactsheetMostRunsCSV {
     @CsvBindByName(column = "Inns", required = true)
     public int inns;
 
+    @CsvBindByName(column = "SR", required = true)
+    public double sr;
+
 }
