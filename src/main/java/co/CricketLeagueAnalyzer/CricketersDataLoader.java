@@ -17,15 +17,15 @@ public class CricketersDataLoader {
 
 
     public <E> Map<String, CricketersDataDAO> loadFactSheetData(Class<E> factSheetCSVClass, String csvFilePath) throws CricketLeagueAnalyserException {
-        Map<String, CricketersDataDAO> censusStateMap = new HashMap<>();
+        Map<String, CricketersDataDAO> map = new HashMap<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<E> csvFileIterator = csvBuilder.getCSVFileIterator(reader, factSheetCSVClass);
             Iterable<E> csvIterable = () -> csvFileIterator;
             StreamSupport.stream(csvIterable.spliterator(), false)
                     .map(IPL2019FactsheetMostRunsCSV.class::cast)
-                    .forEach(censusCSV -> censusStateMap.put(censusCSV.player, new CricketersDataDAO(censusCSV)));
-            return censusStateMap;
+                    .forEach(cricketCSV -> map.put(cricketCSV.player, new CricketersDataDAO(cricketCSV)));
+            return map;
         } catch (IOException e) {
             throw new CricketLeagueAnalyserException(e.getMessage(),
                     CricketLeagueAnalyserException.ExceptionType.FILE_TYPE_PROBLEM);
