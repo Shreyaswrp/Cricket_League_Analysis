@@ -152,4 +152,16 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+    //added to know bowling avg with best best strike rates
+    public String getBowlingAverageWithBestStrikeRatesSortedFactSheet() throws CricketLeagueAnalyserException {
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> avgRunComparator = Comparator.comparing(cricket -> cricket.bowlingAvg);
+        Comparator<CricketersDataDAO> strikeRateComparator = Comparator.comparing(cricket -> cricket.sr);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = descendingSort(strikeRateComparator.thenComparing(avgRunComparator),cricketersDataDAOList);
+        String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
+        return sortedFactSheetJson;
+    }
 }
