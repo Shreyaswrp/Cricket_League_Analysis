@@ -94,4 +94,15 @@ public class CricketLeagueAnalyzer {
         return sortedFactSheetJson;
     }
 
+    public String getBestRunsWithBattingAverageSortedFactSheet() throws CricketLeagueAnalyserException{
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> avgRunComparator = Comparator.comparing(cricket -> cricket.avg);
+        Comparator<CricketersDataDAO> strikeRateComparator = Comparator.comparing(cricket -> cricket.runs);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = descendingSort(strikeRateComparator.thenComparing(avgRunComparator),cricketersDataDAOList);
+        String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
+        return sortedFactSheetJson;
+    }
 }
