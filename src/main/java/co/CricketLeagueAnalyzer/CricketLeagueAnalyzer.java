@@ -34,6 +34,19 @@ public class CricketLeagueAnalyzer {
         }
         return censusList;
     }
+    private List<CricketersDataDAO> sort(Comparator<CricketersDataDAO> csvComparator, List<CricketersDataDAO> censusList) {
+        for (int i = 0; i < censusList.size() - 1; i++) {
+            for (int j = 0; j < censusList.size() - i - 1; j++) {
+                CricketersDataDAO census1 = censusList.get(j);
+                CricketersDataDAO census2 = censusList.get(j + 1);
+                if (csvComparator.compare(census1, census2) > 0) {
+                    censusList.set(j, census2);
+                    censusList.set(j + 1, census1);
+                }
+            }
+        }
+        return censusList;
+    }
 
     //to know top batting averages of the cricketers
     public String getBattingAvrageSortedCricketersData() throws CricketLeagueAnalyserException {
@@ -214,6 +227,18 @@ public class CricketLeagueAnalyzer {
         Comparator<CricketersDataDAO> avgComparator = Comparator.comparing(cricket -> cricket.avg);
         List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
         cricketersDataDAOList = descendingSort(avgComparator.thenComparing(hundredComparator),cricketersDataDAOList);
+        String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
+        return sortedFactSheetJson;
+    }
+    //added to know cricketers who hit zero 100 and 50 with best batting avg
+    public String getBestBattingAvgWithZero100And50SortedFactSheet() throws CricketLeagueAnalyserException {
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> battingAvgComparator = Comparator.comparing(cricketFact -> cricketFact.avg);
+        Comparator<CricketersDataDAO> cricketDataComparator = Comparator.comparing(cricket -> cricket.hundred * 100 + cricket.fifty * 50);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = sort(cricketDataComparator.thenComparing(battingAvgComparator),cricketersDataDAOList);
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }

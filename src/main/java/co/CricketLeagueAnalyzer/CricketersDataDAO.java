@@ -16,6 +16,7 @@ public class CricketersDataDAO {
     public double bowlingAvg;
     public double economyRate;
     public int hundred;
+    public int fifty;
 
     public CricketersDataDAO(IPL2019FactsheetMostRunsCSV mostRunsCSV) {
         player = mostRunsCSV.player;
@@ -27,6 +28,7 @@ public class CricketersDataDAO {
         fours = mostRunsCSV.fours;
         sixes = mostRunsCSV.sixes;
         hundred = mostRunsCSV.hundred;
+        fifty = mostRunsCSV.fifty;
     }
 
     public CricketersDataDAO(IPL2019FactsheetMostWktsCSV mostWktsCSV) {

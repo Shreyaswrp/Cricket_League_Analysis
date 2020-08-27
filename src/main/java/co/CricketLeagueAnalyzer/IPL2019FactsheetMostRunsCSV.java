@@ -29,4 +29,7 @@ public class IPL2019FactsheetMostRunsCSV {
 
     @CsvBindByName(column = "100", required = true)
     public int hundred;
+
+    @CsvBindByName(column = "50", required = true)
+    public int fifty;
 }

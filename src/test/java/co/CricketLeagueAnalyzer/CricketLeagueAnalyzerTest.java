@@ -135,4 +135,12 @@ public class CricketLeagueAnalyzerTest {
         IPL2019FactsheetMostRunsCSV[] iplMostRunCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostRunsCSV[].class);
         Assert.assertEquals("MS Dhoni", iplMostRunCSV[0].player);
     }
+    @Test
+    public void givenFactSheetIPL2019_WhenSortedOnHundredAnd50WithAvg_ShouldReturnSortedResult() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyzer cricketLeagueAnalyser = new CricketLeagueAnalyzer();
+        cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BATSMEN, IPL_MOST_RUNS_CSV_FILE_PATH);
+        String sortedFactSheetData = cricketLeagueAnalyser.getBestBattingAvgWithZero100And50SortedFactSheet();
+        IPL2019FactsheetMostRunsCSV[] iplMostRunCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostRunsCSV[].class);
+        Assert.assertEquals("Ishant Sharma", iplMostRunCSV[0].player);
+    }
 }
