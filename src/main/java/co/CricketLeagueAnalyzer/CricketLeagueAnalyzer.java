@@ -68,4 +68,17 @@ public class CricketLeagueAnalyzer {
         return new Gson().toJson(cricketersDataDAOList);
     }
 
+    //to know cricketers who had best striking rates with 6s and 4s
+    public String getMax4sAnd6sWithStrikeRatesSortedFactSheet()throws CricketLeagueAnalyserException {
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> cricketDataComparator = Comparator.comparing(cricket -> cricket.sr);
+        Comparator<CricketersDataDAO> fourAndSixComparator = Comparator.comparing(cricket -> cricket.fours * 4 + cricket.sixes * 6);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = descendingSort(fourAndSixComparator.thenComparing(cricketDataComparator),cricketersDataDAOList);
+        String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
+        return sortedFactSheetJson;
+    }
+
 }
