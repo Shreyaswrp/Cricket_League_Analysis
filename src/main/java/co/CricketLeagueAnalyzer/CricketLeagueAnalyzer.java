@@ -117,4 +117,14 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
         return sortedFactSheetJson;
     }
+
+    //added to know bowlers who have top striking rates
+    public String getBestBowlerStrikeRateSortedFactSheet() {
+        Comparator<CricketersDataDAO> bowlerStrikeRateComparator = Comparator.comparing(cricketFact -> cricketFact.sr);
+        List<CricketersDataDAO> factSheetDAO = map.values().stream()
+                .collect(Collectors.toList());
+        this.descendingSort( bowlerStrikeRateComparator,factSheetDAO);
+        String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
+        return sortedFactSheetJson;
+    }
 }
