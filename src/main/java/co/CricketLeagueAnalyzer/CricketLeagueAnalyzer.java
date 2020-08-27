@@ -193,4 +193,16 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+    //to know cricketers who are all rounders
+    public String getAllRounderCricketers() throws CricketLeagueAnalyserException{
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> WktsComparator = Comparator.comparing(cricket -> cricket.wkts);
+        Comparator<CricketersDataDAO> RunsComparator = Comparator.comparing(cricket -> cricket.runs);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = descendingSort(RunsComparator.thenComparing(WktsComparator),cricketersDataDAOList);
+        String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
+        return sortedFactSheetJson;
+    }
 }
