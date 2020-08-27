@@ -81,14 +81,15 @@ public class CricketLeagueAnalyzer {
         return sortedFactSheetJson;
     }
 
+    //to know which batsman had great avg with best strike rate possible
     public String getBattingAverageWithStrikeRatesSortedFactSheet() throws CricketLeagueAnalyserException {
         if (map == null || map.size() == 0) {
             throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
         }
-        Comparator<CricketersDataDAO> cricketDataComparator = Comparator.comparing(cricket -> cricket.avg);
+        Comparator<CricketersDataDAO> avgRunComparator = Comparator.comparing(cricket -> cricket.avg);
         Comparator<CricketersDataDAO> strikeRateComparator = Comparator.comparing(cricket -> cricket.sr);
         List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
-        cricketersDataDAOList = descendingSort(strikeRateComparator.thenComparing(cricketDataComparator),cricketersDataDAOList);
+        cricketersDataDAOList = descendingSort(strikeRateComparator.thenComparing(avgRunComparator),cricketersDataDAOList);
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
