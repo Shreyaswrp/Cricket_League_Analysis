@@ -16,7 +16,7 @@ public class CricketLeagueAnalyzer {
 
     //to load factsheet csv file data
     public int loadLeagueFactSheet(PlayerType playerType, String csvFilePath) throws CricketLeagueAnalyserException {
-        map = new CricketersDataLoader().loadFactSheetData(IPL2019FactsheetMostRunsCSV.class,csvFilePath);
+        map = new CricketersDataLoader().loadLeagueFactSheet(playerType, csvFilePath);
         return map.size();
     }
 
@@ -104,6 +104,14 @@ public class CricketLeagueAnalyzer {
         List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
         cricketersDataDAOList = descendingSort(strikeRateComparator.thenComparing(avgRunComparator),cricketersDataDAOList);
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
+        return sortedFactSheetJson;
+    }
+    public String getBestBowlingAverageSortedFactSheet() throws CricketLeagueAnalyserException{
+        Comparator<CricketersDataDAO> bowlingAvgComparator = Comparator.comparing(leagueFact -> leagueFact.avg);
+        List<CricketersDataDAO> factSheetDAO = map.values().stream()
+                .collect(Collectors.toList());
+        factSheetDAO = descendingSort( bowlingAvgComparator,factSheetDAO);
+        String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
         return sortedFactSheetJson;
     }
 }

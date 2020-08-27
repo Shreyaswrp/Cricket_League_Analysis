@@ -14,6 +14,7 @@ public class CricketersDataDAO {
     public int fiveWkts;
     public int fourWkts;
 
+
     public CricketersDataDAO(IPL2019FactsheetMostRunsCSV mostRunsCSV) {
         player = mostRunsCSV.player;
         matches = mostRunsCSV.matches;

@@ -3,7 +3,7 @@ package co.CricketLeagueAnalyzer;
 public class CricketLeagueAnalyserException extends Exception {
 
     public enum ExceptionType {
-        FILE_TYPE_PROBLEM,WRONG_HEADER,NO_CRICKET_DATA
+        FILE_TYPE_PROBLEM,WRONG_HEADER,NO_CRICKET_DATA,INVALID_PLAYER_TYPE
     }
 
     public ExceptionType type;

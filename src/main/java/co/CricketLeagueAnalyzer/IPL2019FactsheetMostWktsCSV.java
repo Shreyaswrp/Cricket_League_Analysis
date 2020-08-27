@@ -9,9 +9,6 @@ public class IPL2019FactsheetMostWktsCSV {
     @CsvBindByName(column = "Mat", required = true)
     public int matches;
 
-    @CsvBindByName(column = "Runs", required = true)
-    public int runs;
-
     @CsvBindByName(column = "Avg", required = true)
     public double avg;
 
