@@ -23,4 +23,10 @@ public class IPL2019FactsheetMostWktsCSV {
 
     @CsvBindByName(column = "SR", required = true)
     public double sr;
+
+    @CsvBindByName(column = "4w", required = true)
+    public int fourWkts;
+
+    @CsvBindByName(column = "5w", required = true)
+    public int fiveWkts;
 }

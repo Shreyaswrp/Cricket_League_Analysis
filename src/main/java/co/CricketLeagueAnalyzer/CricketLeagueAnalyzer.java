@@ -59,4 +59,14 @@ public class CricketLeagueAnalyzer {
         return new Gson().toJson(cricketersDataDAOList);
     }
 
+    public String getMax4sAnd6sSortedFactSheet() throws CricketLeagueAnalyserException {
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> cricketDataComparator = Comparator.comparing(cricket -> cricket.fours * 4 + cricket.sixes * 6);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = descendingSort(cricketDataComparator, cricketersDataDAOList);
+        return new Gson().toJson(cricketersDataDAOList);
+    }
+
 }
