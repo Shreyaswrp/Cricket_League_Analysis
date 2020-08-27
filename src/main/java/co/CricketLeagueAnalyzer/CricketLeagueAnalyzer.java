@@ -140,5 +140,16 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
         return sortedFactSheetJson;
     }
-
+    //added to know cricketers who had best striking rates with 4W and 5W
+    public String getBestStrikeRateWith4wAnd5wSortedFactSheet() throws CricketLeagueAnalyserException {
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> bowlerStrikeRateComparator = Comparator.comparing(cricketFact -> cricketFact.sr);
+        Comparator<CricketersDataDAO> w4AndW5Comparator = Comparator.comparing(cricket -> cricket.fourWkts * 4 + cricket.fiveWkts * 5);
+        List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
+        cricketersDataDAOList = descendingSort(w4AndW5Comparator.thenComparing(bowlerStrikeRateComparator),cricketersDataDAOList);
+        String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
+        return sortedFactSheetJson;
+    }
 }
