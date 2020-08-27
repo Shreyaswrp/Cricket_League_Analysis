@@ -16,6 +16,7 @@ public class CricketLeagueAnalyzer {
         BATSMEN, BOWLER
     }
 
+    //to load factsheet csv file data
     public int loadLeagueFactSheet(PlayerType playerType, String csvFilePath) throws CricketLeagueAnalyserException {
         map = new CricketersDataLoader().loadFactSheetData(IPL2019FactsheetMostRunsCSV.class,csvFilePath);
         return map.size();
