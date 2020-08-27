@@ -9,17 +9,6 @@ public class CricketLeagueAnalyzerTest {
     private static final String IPL_MOST_RUNS_CSV_FILE_PATH = "./src/test/resources/IPLMOSTRUNS.csv";
 
     @Test
-    public void givenCSVFileReturnsCorrectRecords() {
-        try {
-            CricketLeagueAnalyzer cricketLeagueAnalyzer = new CricketLeagueAnalyzer();
-            int numberOfRecords = cricketLeagueAnalyzer.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BATSMEN, IPL_MOST_RUNS_CSV_FILE_PATH);
-            Assert.assertEquals(100, numberOfRecords);
-            System.out.println("Inside try block");
-        } catch (CricketLeagueAnalyserException e) {
-        }
-    }
-
-    @Test
     public void givenMostRunFactSheet_WhenShortedOnBattingAverage_ShouldReturnSortedResult() throws CricketLeagueAnalyserException {
         CricketLeagueAnalyzer cricketLeagueAnalyser = new CricketLeagueAnalyzer();
         cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BATSMEN, IPL_MOST_RUNS_CSV_FILE_PATH);
