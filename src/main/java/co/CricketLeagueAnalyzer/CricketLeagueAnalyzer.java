@@ -1,12 +1,10 @@
 package co.CricketLeagueAnalyzer;
 
 import com.google.gson.Gson;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 
 public class CricketLeagueAnalyzer {
 
@@ -42,9 +40,9 @@ public class CricketLeagueAnalyzer {
         if (map == null || map.size() == 0) {
             throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
         }
-        Comparator<CricketersDataDAO> censusComparator = Comparator.comparing(cricket -> cricket.avg);
+        Comparator<CricketersDataDAO> cricketDataComparator = Comparator.comparing(cricket -> cricket.avg);
         List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
-        cricketersDataDAOList = descendingSort(censusComparator, cricketersDataDAOList);
+        cricketersDataDAOList = descendingSort(cricketDataComparator, cricketersDataDAOList);
         return new Gson().toJson(cricketersDataDAOList);
     }
 
@@ -53,12 +51,13 @@ public class CricketLeagueAnalyzer {
         if (map == null || map.size() == 0) {
             throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
         }
-        Comparator<CricketersDataDAO> censusComparator = Comparator.comparing(cricket -> cricket.sr);
+        Comparator<CricketersDataDAO> cricketDataComparator = Comparator.comparing(cricket -> cricket.sr);
         List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
-        cricketersDataDAOList = descendingSort(censusComparator, cricketersDataDAOList);
+        cricketersDataDAOList = descendingSort(cricketDataComparator, cricketersDataDAOList);
         return new Gson().toJson(cricketersDataDAOList);
     }
 
+    //to know cricketers who hit maximum 6s and 4s
     public String getMax4sAnd6sSortedFactSheet() throws CricketLeagueAnalyserException {
         if (map == null || map.size() == 0) {
             throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
