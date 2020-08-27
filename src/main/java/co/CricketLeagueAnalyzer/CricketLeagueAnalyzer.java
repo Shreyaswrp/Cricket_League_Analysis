@@ -106,6 +106,7 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+
     //to know bowling avg of the cricketers
     public String getBestBowlingAverageSortedFactSheet() throws CricketLeagueAnalyserException{
         if (map == null || map.size() == 0) {
@@ -129,6 +130,7 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
         return sortedFactSheetJson;
     }
+
     //added to know economy rates of the best bowlers
     public String getBestEconomyRateSortedForBowlersFactSheet() throws CricketLeagueAnalyserException{
         if (map == null || map.size() == 0) {
@@ -140,6 +142,7 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
         return sortedFactSheetJson;
     }
+
     //added to know cricketers who had best striking rates with 4W and 5W
     public String getBestStrikeRateWith4wAnd5wSortedFactSheet() throws CricketLeagueAnalyserException {
         if (map == null || map.size() == 0) {
@@ -152,7 +155,8 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
-    //added to know bowling avg with best best strike rates
+
+    //added to know bowling avg with best strike rates
     public String getBowlingAverageWithBestStrikeRatesSortedFactSheet() throws CricketLeagueAnalyserException {
         if (map == null || map.size() == 0) {
             throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
