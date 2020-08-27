@@ -94,6 +94,7 @@ public class CricketLeagueAnalyzer {
         return sortedFactSheetJson;
     }
 
+    //to know who hits maximum runs with best avg
     public String getBestRunsWithBattingAverageSortedFactSheet() throws CricketLeagueAnalyserException{
         if (map == null || map.size() == 0) {
             throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
