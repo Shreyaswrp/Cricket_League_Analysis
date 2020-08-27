@@ -95,11 +95,19 @@ public class CricketLeagueAnalyzerTest {
         Assert.assertEquals("Lasith Malinga", iplMostRunCSV[0].player);
     }
     @Test
-    public void givenMostRunFactSheet_WhenShortedOnBowlingAverageWithBestStrikingRates_ShouldReturnSortedResult() throws CricketLeagueAnalyserException {
+    public void givenMostRunFactSheet_WhenSortedOnBowlingAverageWithBestStrikingRates_ShouldReturnSortedResult() throws CricketLeagueAnalyserException {
         CricketLeagueAnalyzer cricketLeagueAnalyser = new CricketLeagueAnalyzer();
         cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BOWLER, IPL_MOST_WKTS_CSV_FILE_PATH);
         String sortedFactSheetData = cricketLeagueAnalyser.getBowlingAverageWithBestStrikeRatesSortedFactSheet();
         IPL2019FactsheetMostWktsCSV[] iplMostWktsCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostWktsCSV[].class);
         Assert.assertEquals("Krishnappa Gowtham", iplMostWktsCSV[0].player);
+    }
+    @Test
+    public void givenMostWktsFactSheet_WhenSortedOnBestWktsWithBowlingAverage_ShouldReturnSortedResult() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyzer cricketLeagueAnalyser = new CricketLeagueAnalyzer();
+        cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BOWLER, IPL_MOST_WKTS_CSV_FILE_PATH);
+        String sortedFactSheetData = cricketLeagueAnalyser.getMaxWktsWithBowlingAverageSortedFactSheet();
+        IPL2019FactsheetMostWktsCSV[] iplMostRunCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostWktsCSV[].class);
+        Assert.assertEquals("Imran Tahir", iplMostRunCSV[0].player);
     }
 }
