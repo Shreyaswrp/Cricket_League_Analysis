@@ -77,4 +77,13 @@ public class CricketLeagueAnalyzerTest {
         IPL2019FactsheetMostWktsCSV[] iplMostWktsCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostWktsCSV[].class);
         Assert.assertEquals("Krishnappa Gowtham", iplMostWktsCSV[0].player);
     }
+
+    @Test
+    public void givenMostRunFactSheet_WhenShortedOnBestEconomyRate_ShouldReturnSortedResult() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyzer cricketLeagueAnalyser = new CricketLeagueAnalyzer();
+        cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BOWLER, IPL_MOST_WKTS_CSV_FILE_PATH);
+        String sortedFactSheetData = cricketLeagueAnalyser.getBestEconomyRateSortedForBowlersFactSheet();
+        IPL2019FactsheetMostWktsCSV[] iplMostRunCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostWktsCSV[].class);
+        Assert.assertEquals("Ben Cutting", iplMostRunCSV[0].player);
+    }
 }

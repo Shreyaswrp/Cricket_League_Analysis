@@ -119,12 +119,26 @@ public class CricketLeagueAnalyzer {
     }
 
     //added to know bowlers who have top striking rates
-    public String getBestBowlerStrikeRateSortedFactSheet() {
+    public String getBestBowlerStrikeRateSortedFactSheet() throws CricketLeagueAnalyserException{
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
         Comparator<CricketersDataDAO> bowlerStrikeRateComparator = Comparator.comparing(cricketFact -> cricketFact.sr);
-        List<CricketersDataDAO> factSheetDAO = map.values().stream()
-                .collect(Collectors.toList());
+        List<CricketersDataDAO> factSheetDAO = map.values().stream().collect(Collectors.toList());
         this.descendingSort( bowlerStrikeRateComparator,factSheetDAO);
         String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
         return sortedFactSheetJson;
     }
+    //added to know economy rates of the best bowlers
+    public String getBestEconomyRateSortedForBowlersFactSheet() throws CricketLeagueAnalyserException{
+        if (map == null || map.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
+        }
+        Comparator<CricketersDataDAO> ecoRateComparator = Comparator.comparing(leagueFact -> leagueFact.economyRate);
+        List<CricketersDataDAO> factSheetDAO = map.values().stream().collect(Collectors.toList());
+        factSheetDAO = descendingSort( ecoRateComparator,factSheetDAO);
+        String sortedFactSheetJson = new Gson().toJson(factSheetDAO);
+        return sortedFactSheetJson;
+    }
+
 }
