@@ -216,7 +216,7 @@ public class CricketLeagueAnalyzer {
         Comparator<CricketersDataDAO> hundredComparator = Comparator.comparing(cricket -> cricket.hundred);
         Comparator<CricketersDataDAO> avgComparator = Comparator.comparing(cricket -> cricket.avg);
         List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
-        cricketersDataDAOList = descendingSort(avgComparator.thenComparing(hundredComparator),cricketersDataDAOList);
+        cricketersDataDAOList = descendingSort(hundredComparator .thenComparing(avgComparator),cricketersDataDAOList);
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
