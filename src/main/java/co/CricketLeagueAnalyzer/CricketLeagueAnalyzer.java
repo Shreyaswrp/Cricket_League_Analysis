@@ -218,6 +218,7 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+
     //to know who hit maximum hundreds and had best avgs
     public String getMaximumHundredWithAvgSorted() throws CricketLeagueAnalyserException{
         if (map == null || map.size() == 0) {
@@ -230,15 +231,16 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+
     //added to know cricketers who hit zero 100 and 50 with best batting avg
     public String getBestBattingAvgWithZero100And50SortedFactSheet() throws CricketLeagueAnalyserException {
         if (map == null || map.size() == 0) {
             throw new CricketLeagueAnalyserException("No Cricket Data", CricketLeagueAnalyserException.ExceptionType.NO_CRICKET_DATA);
         }
         Comparator<CricketersDataDAO> battingAvgComparator = Comparator.comparing(cricketFact -> cricketFact.avg);
-        Comparator<CricketersDataDAO> cricketDataComparator = Comparator.comparing(cricket -> cricket.hundred * 100 + cricket.fifty * 50);
+        Comparator<CricketersDataDAO> cricketDataComparator = Comparator.comparing(cricket -> cricket.hundred * 100 + cricket.fifty * 50 == 0);
         List<CricketersDataDAO> cricketersDataDAOList = map.values().stream().collect(Collectors.toList());
-        cricketersDataDAOList = sort(cricketDataComparator.thenComparing(battingAvgComparator),cricketersDataDAOList);
+        cricketersDataDAOList = descendingSort(cricketDataComparator.thenComparing(battingAvgComparator),cricketersDataDAOList);
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }

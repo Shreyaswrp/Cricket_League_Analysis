@@ -141,6 +141,6 @@ public class CricketLeagueAnalyzerTest {
         cricketLeagueAnalyser.loadLeagueFactSheet(CricketLeagueAnalyzer.PlayerType.BATSMEN, IPL_MOST_RUNS_CSV_FILE_PATH);
         String sortedFactSheetData = cricketLeagueAnalyser.getBestBattingAvgWithZero100And50SortedFactSheet();
         IPL2019FactsheetMostRunsCSV[] iplMostRunCSV =  new Gson().fromJson(sortedFactSheetData, IPL2019FactsheetMostRunsCSV[].class);
-        Assert.assertEquals("Ishant Sharma", iplMostRunCSV[0].player);
+        Assert.assertEquals("Shimron Hetmyer", iplMostRunCSV[0].player);
     }
 }
