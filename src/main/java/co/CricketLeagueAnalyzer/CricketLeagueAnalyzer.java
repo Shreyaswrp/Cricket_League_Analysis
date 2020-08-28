@@ -34,19 +34,6 @@ public class CricketLeagueAnalyzer {
         }
         return censusList;
     }
-    private List<CricketersDataDAO> sort(Comparator<CricketersDataDAO> csvComparator, List<CricketersDataDAO> censusList) {
-        for (int i = 0; i < censusList.size() - 1; i++) {
-            for (int j = 0; j < censusList.size() - i - 1; j++) {
-                CricketersDataDAO census1 = censusList.get(j);
-                CricketersDataDAO census2 = censusList.get(j + 1);
-                if (csvComparator.compare(census1, census2) > 0) {
-                    censusList.set(j, census2);
-                    censusList.set(j + 1, census1);
-                }
-            }
-        }
-        return censusList;
-    }
 
     //to know top batting averages of the cricketers
     public String getBattingAvrageSortedCricketersData() throws CricketLeagueAnalyserException {
@@ -194,6 +181,7 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+
     //to know cricketers who had best bowling avg and best batting avg
     public String getMaxBattingBowlingAverageSortedFactSheet() throws CricketLeagueAnalyserException{
         if (map == null || map.size() == 0) {
@@ -206,6 +194,7 @@ public class CricketLeagueAnalyzer {
         String sortedFactSheetJson = new Gson().toJson(cricketersDataDAOList);
         return sortedFactSheetJson;
     }
+
     //to know cricketers who are all rounders
     public String getAllRounderCricketers() throws CricketLeagueAnalyserException{
         if (map == null || map.size() == 0) {
